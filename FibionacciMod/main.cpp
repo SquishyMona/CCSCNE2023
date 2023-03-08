@@ -1,30 +1,34 @@
 #include <iostream>
 #include <string>
 #include <cmath>
-#include <vector>
+#include <stack>
 
 using namespace std;
 
-int calcFibSeries(int, int);
-
 int main()
 {
-    int modNum = 3;
-    int fibArr;
-    int modArr;
-    fibArr[0] = 1;
-    fibArr[1] = 1;
+    int n = 3;
+    stack<int> sta;
+    int num1, num2;
+    sta.push(1);
+    sta.push(1);
 
-    for (int i = 2; i < modNum; i++)
+    for(int i = 1; true; i++)
     {
-        fibArr[i] = fibArr[i - 1] + fibArr[i - 2];
-        modArr[i] = calcFibSeries(fibArr[i], modNum);
-        cout << modArr[i] << endl;
+        num1 = sta.top();
+        sta.pop();
+        num2 = sta.top();
+        if (num1 == 1)
+        {
+            if (num2 == 0)
+            {
+                cout << endl << i << endl;
+                break;
+            }
+        }
+        sta.pop();
+        sta.push(num1);
+        sta.push((num1 + num2) % n);
+        cout << (num1 + num2) % n << " ";
     }
-
-    return 0;
-}
-
-int calcFibSeries(int i, int n) {
-    return i % n;
 }
